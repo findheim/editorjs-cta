@@ -1,7 +1,7 @@
 /**
  * Build styles
  */
-require('./index.css').toString();
+require("./index.css").toString();
 
 /**
  * @class Quote
@@ -21,7 +21,7 @@ require('./index.css').toString();
  * @property {string} captionPlaceholder - placeholder to show in quote`s caption input
  * @property {'center'|'left'} defaultAlignment - alignment to use as default
  */
-class Quote {
+class CTA {
   /**
    * Get Tool toolbox settings
    * icon - Tool icon's SVG
@@ -31,8 +31,9 @@ class Quote {
    */
   static get toolbox() {
     return {
-      icon: '<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg"><path d="M13.53 6.185l.027.025a1.109 1.109 0 0 1 0 1.568l-5.644 5.644a1.109 1.109 0 1 1-1.569-1.568l4.838-4.837L6.396 2.23A1.125 1.125 0 1 1 7.986.64l5.52 5.518.025.027zm-5.815 0l.026.025a1.109 1.109 0 0 1 0 1.568l-5.644 5.644a1.109 1.109 0 1 1-1.568-1.568l4.837-4.837L.58 2.23A1.125 1.125 0 0 1 2.171.64L7.69 6.158l.025.027z" /></svg>',
-      title: 'Quote'
+      icon:
+        '<svg height="15" viewBox="0 0 15 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m452 512h-392c-33.085938 0-60-26.914062-60-60v-392c0-33.085938 26.914062-60 60-60h392c33.085938 0 60 26.914062 60 60v392c0 33.085938-26.914062 60-60 60zm-392-472c-11.027344 0-20 8.972656-20 20v392c0 11.027344 8.972656 20 20 20h392c11.027344 0 20-8.972656 20-20v-392c0-11.027344-8.972656-20-20-20zm372 392h-352v-120h352zm-312-40h272v-40h-272zm0 0"/></svg>',
+      title: "CTA"
     };
   }
 
@@ -54,14 +55,18 @@ class Quote {
     return true;
   }
 
+  static get DEFAULT_TITLE_PLACEHOLDER() {
+    return "Enter a title";
+  }
+
   /**
    * Default placeholder for quote text
    *
    * @public
    * @returns {string}
    */
-  static get DEFAULT_QUOTE_PLACEHOLDER() {
-    return 'Enter a quote';
+  static get DEFAULT_TEXT_PLACEHOLDER() {
+    return "Enter a text";
   }
 
   /**
@@ -70,51 +75,8 @@ class Quote {
    * @public
    * @returns {string}
    */
-  static get DEFAULT_CAPTION_PLACEHOLDER() {
-    return 'Enter a caption';
-  }
-
-  /**
-   * Allowed quote alignments
-   *
-   * @public
-   * @returns {{left: string, center: string}}
-   */
-  static get ALIGNMENTS() {
-    return {
-      left: 'left',
-      center: 'center'
-    };
-  }
-
-  /**
-   * Default quote alignment
-   *
-   * @public
-   * @returns {string}
-   */
-  static get DEFAULT_ALIGNMENT() {
-    return Quote.ALIGNMENTS.left;
-  }
-
-  /**
-   * Allow Quote to be converted to/from other blocks
-   */
-  static get conversionConfig(){
-    return {
-      /**
-       * To create Quote data from string, simple fill 'text' property
-       */
-      import: 'text',
-      /**
-       * To create string from Quote data, concatenate text and caption
-       * @param {QuoteData} quoteData
-       * @return {string}
-       */
-      export: function (quoteData) {
-        return quoteData.caption ? `${quoteData.text} — ${quoteData.caption}` : quoteData.text;
-      }
-    };
+  static get DEFAULT_BUTTON_PLACEHOLDER() {
+    return "Enter a button text";
   }
 
   /**
@@ -125,32 +87,15 @@ class Quote {
   get CSS() {
     return {
       baseClass: this.api.styles.block,
-      wrapper: 'cdx-quote',
-      text: 'cdx-quote__text',
+      wrapper: "cdx-cta",
+      text: "cdx-cta__text",
       input: this.api.styles.input,
-      caption: 'cdx-quote__caption',
-      settingsWrapper: 'cdx-quote-settings',
+      title: "cdx-cta__title",
+      button: "cdx-cta__button",
+      settingsWrapper: "cdx-cta-settings",
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive
     };
-  }
-
-  /**
-   * Tool`s settings properties
-   *
-   * @returns {*[]}
-   */
-  get settings() {
-    return [
-      {
-        name: 'left',
-        icon: `<svg width="16" height="11" viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg" ><path d="M1.069 0H13.33a1.069 1.069 0 0 1 0 2.138H1.07a1.069 1.069 0 1 1 0-2.138zm0 4.275H9.03a1.069 1.069 0 1 1 0 2.137H1.07a1.069 1.069 0 1 1 0-2.137zm0 4.275h9.812a1.069 1.069 0 0 1 0 2.137H1.07a1.069 1.069 0 0 1 0-2.137z" /></svg>`
-      },
-      {
-        name: 'center',
-        icon: `<svg width="16" height="11" viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg" ><path d="M1.069 0H13.33a1.069 1.069 0 0 1 0 2.138H1.07a1.069 1.069 0 1 1 0-2.138zm3.15 4.275h5.962a1.069 1.069 0 0 1 0 2.137H4.22a1.069 1.069 0 1 1 0-2.137zM1.069 8.55H13.33a1.069 1.069 0 0 1 0 2.137H1.07a1.069 1.069 0 0 1 0-2.137z"/></svg>`
-      }
-    ];
   }
 
   /**
@@ -161,20 +106,20 @@ class Quote {
    *   config - user config for Tool
    *   api - Editor.js API
    */
-  constructor({data, config, api}) {
-    const {ALIGNMENTS, DEFAULT_ALIGNMENT} = Quote;
-
+  constructor({ data, config, api }) {
     this.api = api;
 
-    this.quotePlaceholder = config.quotePlaceholder || Quote.DEFAULT_QUOTE_PLACEHOLDER;
-    this.captionPlaceholder = config.captionPlaceholder || Quote.DEFAULT_CAPTION_PLACEHOLDER;
+    this.titlePlaceholder =
+      config.titlePlaceholder || CTA.DEFAULT_TITLE_PLACEHOLDER;
+    this.textPlaceholder =
+      config.textPlaceholder || CTA.DEFAULT_TEXT_PLACEHOLDER;
+    this.buttonPlaceholder =
+      config.buttonPlaceholder || CTA.DEFAULT_BUTTON_PLACEHOLDER;
 
     this.data = {
-      text: data.text || '',
-      caption: data.caption || '',
-      alignment: Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment ||
-      config.defaultAlignment ||
-      DEFAULT_ALIGNMENT
+      title: data.title || "",
+      text: data.text || "",
+      button: data.button || ""
     };
   }
 
@@ -184,21 +129,30 @@ class Quote {
    * @returns {Element}
    */
   render() {
-    const container = this._make('blockquote', [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make('div', [this.CSS.input, this.CSS.text], {
+    const container = this._make("blockquote", [
+      this.CSS.baseClass,
+      this.CSS.wrapper
+    ]);
+    const title = this._make("div", [this.CSS.input, this.CSS.caption], {
+      contentEditable: true,
+      innerHTML: this.data.title
+    });
+    const text = this._make("div", [this.CSS.input, this.CSS.text], {
       contentEditable: true,
       innerHTML: this.data.text
     });
-    const caption = this._make('div', [this.CSS.input, this.CSS.caption], {
+    const button = this._make("div", [this.CSS.input, this.CSS.caption], {
       contentEditable: true,
-      innerHTML: this.data.caption
+      innerHTML: this.data.button
     });
 
-    quote.dataset.placeholder = this.quotePlaceholder;
-    caption.dataset.placeholder = this.captionPlaceholder;
+    title.dataset.placeholder = this.titlePlaceholder;
+    text.dataset.placeholder = this.textPlaceholder;
+    button.dataset.placeholder = this.buttonPlaceholder;
 
-    container.appendChild(quote);
-    container.appendChild(caption);
+    container.appendChild(title);
+    container.appendChild(text);
+    container.appendChild(button);
 
     return container;
   }
@@ -211,11 +165,13 @@ class Quote {
    */
   save(quoteElement) {
     const text = quoteElement.querySelector(`.${this.CSS.text}`);
-    const caption = quoteElement.querySelector(`.${this.CSS.caption}`);
+    const title = quoteElement.querySelector(`.${this.CSS.title}`);
+    const button = quoteElement.querySelector(`.${this.CSS.button}`);
 
     return Object.assign(this.data, {
       text: text.innerHTML,
-      caption: caption.innerHTML
+      title: title.innerHTML,
+      button: button.innerHTML
     });
   }
 
@@ -225,62 +181,15 @@ class Quote {
   static get sanitize() {
     return {
       text: {
-        br: true,
+        br: true
       },
-      caption: {
-        br: true,
+      title: {
+        br: true
       },
-      alignment: {}
+      button: {
+        br: true
+      }
     };
-  }
-
-  /**
-   * Create wrapper for Tool`s settings buttons:
-   * 1. Left alignment
-   * 2. Center alignment
-   *
-   * @returns {HTMLDivElement}
-   */
-  renderSettings() {
-    const wrapper = this._make('div', [ this.CSS.settingsWrapper ], {});
-    const capitalize = str => str[0].toUpperCase() + str.substr(1);
-
-    this.settings
-      .map( tune => {
-        const el = this._make('div', this.CSS.settingsButton, {
-          innerHTML: tune.icon,
-          title: `${capitalize(tune.name)} alignment`
-        });
-
-        el.classList.toggle(this.CSS.settingsButtonActive, tune.name === this.data.alignment);
-
-        wrapper.appendChild(el);
-
-        return el;
-      })
-      .forEach((element, index, elements) => {
-        element.addEventListener('click', () => {
-          this._toggleTune(this.settings[index].name);
-
-          elements.forEach((el, i) => {
-            const {name} = this.settings[i];
-
-            el.classList.toggle(this.CSS.settingsButtonActive, name === this.data.alignment);
-          });
-        });
-      });
-
-    return wrapper;
-  };
-
-  /**
-   * Toggle quote`s alignment
-   *
-   * @param {string} tune - alignment
-   * @private
-   */
-  _toggleTune(tune) {
-    this.data.alignment = tune;
   }
 
   /**
@@ -294,9 +203,9 @@ class Quote {
   _make(tagName, classNames = null, attributes = {}) {
     let el = document.createElement(tagName);
 
-    if ( Array.isArray(classNames) ) {
+    if (Array.isArray(classNames)) {
       el.classList.add(...classNames);
-    } else if( classNames ) {
+    } else if (classNames) {
       el.classList.add(classNames);
     }
 
@@ -308,4 +217,4 @@ class Quote {
   }
 }
 
-module.exports = Quote;
+module.exports = CTA;
