@@ -133,7 +133,7 @@ class CTA {
       this.CSS.baseClass,
       this.CSS.wrapper
     ]);
-    const title = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const title = this._make("div", [this.CSS.input, this.CSS.title], {
       contentEditable: true,
       innerHTML: this.data.title
     });
@@ -141,7 +141,7 @@ class CTA {
       contentEditable: true,
       innerHTML: this.data.text
     });
-    const button = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const button = this._make("div", [this.CSS.input, this.CSS.button], {
       contentEditable: true,
       innerHTML: this.data.button
     });
